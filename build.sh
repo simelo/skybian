@@ -401,7 +401,7 @@ function img_mount() {
     sudo mount -t auto "${IMG_LOOP}" "${FS_MNT_POINT}" -o loop,rw
 
     # Create the Skywire data folder if not there
-    mkdir -p "${FS_MNT_POINT}${SKYWIRE_DATA}
+    mkdir -p "${FS_MNT_POINT}${SKYWIRE_DATA}"
 
     # user info
     info "RootFS is ready to work with in ${FS_MNT_POINT}"
