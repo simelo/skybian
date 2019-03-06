@@ -400,9 +400,6 @@ function img_mount() {
     info "Mounting root fs to work with"
     sudo mount -t auto "${IMG_LOOP}" "${FS_MNT_POINT}" -o loop,rw
 
-    # Create the Skywire data folder if not there
-    mkdir -p "${FS_MNT_POINT}${SKYWIRE_DATA}"
-
     # user info
     info "RootFS is ready to work with in ${FS_MNT_POINT}"
 }
@@ -431,6 +428,7 @@ function install_go() {
 
 
 # get and install skywire inside the FS
+# this time we are working with mainnet that is on a branch
 function get_n_install_skywire() {
     # get it on downloads, and if all is good then move it to final dest inside the image
     info "Getting last version of Skywire to install inside the chroot"
@@ -467,6 +465,13 @@ function get_n_install_skywire() {
 
     # copy it to the final dest
     sudo rsync -a "${DOWNLOADS_DIR}/skywire" "${FS_MNT_POINT}${SKYCOIN_DIR}"
+
+    # change the branch to mainnet and pull it to be sure
+    cd "${FS_MNT_POINT}${SKYWIRE_DIR}"
+    sudo git checkout mainnet
+    sudo git pull
+    cd ${ROOT}
+
 }
 
 

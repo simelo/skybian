@@ -7,11 +7,14 @@ GOROOT=/usr/local/go
 GOPATH=/usr/local/skywire/go
 SKYCOIN_DIR=${GOPATH}/src/github.com/skycoin
 SKYWIRE_DIR=${SKYCOIN_DIR}/skywire
+SKYWIRE_DATA=$HOME/.skycoin/skywire/
+PATH=$PATH:$GOPATH/bin/:$GOROOT/bin/
 export HOME
 export GOROOT
 export GOPATH
 export SKYCOIN_DIR 
 export SKYWIRE_DIR
+export PATH
 
 # function to log messages as info
 function info() {
@@ -21,6 +24,9 @@ function info() {
 # Chroot extra commands. This allow us to pass some extra commands
 # inside the chroot, for example to install/remove additional pkgs
 # or execute some bash commands
+
+# Create the Skywire data folder if not there
+mkdir -p $SKYWIRE_DATA
 
 # by default update the es_US locales
 info "Re-generating the locales info for en_US.UTF-8"
@@ -41,9 +47,24 @@ apt-get clean
 # there is a known issues about go and qemu, the most usefull workaround is to 
 # keep thread count low, see https://gist.github.com/ahrex/9a84f32a33aadc197a688d2158d7e2ea
 CORE=`lscpu -p  | sed -ne '/^[0-9]\+/ s/,.*$//pg' | sort -R | head -n 1`
+# creating the data dirs for skywire
+info "Creating the data dirs for skywire"
+cd $SKYWIRE_DATA
+mkdir skywire
+mkdir apps
+# compiling
 info "Compile Skywire inside the chroot with Go-Qemu Patch"
-cd ${SKYWIRE_DIR}/cmd
-/usr/bin/taskset -c ${CORE} ${GOROOT}/bin/go install -v ./...
+cd ${SKYWIRE_DIR}
+/usr/bin/taskset -c ${CORE} GO111MODULE=on go install ./cmd/skywire-node ./cmd/skywire-cli ./cmd/manager-node ./cmd/therealssh-cli
+/usr/bin/taskset -c ${CORE} GO111MODULE=on go build -o $SKYWIRE_DATA/apps/chat.v1.0 ./cmd/apps/chat
+/usr/bin/taskset -c ${CORE} GO111MODULE=on go build -o $SKYWIRE_DATA/apps/helloworld.v1.0 ./cmd/apps/helloworld
+/usr/bin/taskset -c ${CORE} GO111MODULE=on go build -o $SKYWIRE_DATA/apps/therealproxy.v1.0 ./cmd/apps/therealproxy
+/usr/bin/taskset -c ${CORE} GO111MODULE=on go build -o $SKYWIRE_DATA/apps/therealproxy-client.v1.0  ./cmd/apps/therealproxy-client
+/usr/bin/taskset -c ${CORE} GO111MODULE=on go build -o $SKYWIRE_DATA/apps/therealssh.v1.0  ./cmd/apps/therealssh
+/usr/bin/taskset -c ${CORE} GO111MODULE=on go build -o $SKYWIRE_DATA/apps/therealssh-client.v1.0  ./cmd/apps/therealssh-client
+# creating the config  for the node
+info "Generating the config for this node (skywire.json)"
+skywire-cli config
 
 # forge a time on the system to avoid fs dates are in the future
 info "Setting the chroot clock to now to avoid bugs with the date"
