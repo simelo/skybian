@@ -11,8 +11,10 @@ else
     GOROOT=/usr/local/go
     GOBIN=${GOROOT}/bin
     GOPATH=/usr/local/skywire/go
+    PATH=$PATH:$GOPATH/bin
 fi
 
 export GOROOT
 export GOBIN
 export GOPATH
+export PATH
