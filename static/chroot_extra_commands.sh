@@ -4,16 +4,17 @@
 # see http://github.com/skycoin/skywire
 HOME=/root
 GOROOT=/usr/local/go
-GOPATH=/usr/local/skywire/go
-SKYCOIN_DIR=${GOPATH}/src/github.com/skycoin
+SKYCOIN_DIR=/usr/local/skycoin
+GOPATH=${SKYCOIN_DIR}/go
 SKYWIRE_DIR=${SKYCOIN_DIR}/skywire
-SKYWIRE_DATA=$HOME/.skycoin/skywire/
+SKYWIRE_DATA=${HOME}/.skycoin/skywire/
 PATH=$PATH:$GOPATH/bin/:$GOROOT/bin/
 export HOME
 export GOROOT
 export GOPATH
 export SKYCOIN_DIR 
 export SKYWIRE_DIR
+export SKYWIRE_DATA
 export PATH
 
 # function to log messages as info
