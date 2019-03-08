@@ -8,9 +8,11 @@ if [ -f "/etc/default/skywire" ] ; then
     . "/etc/default/skywire"
 else
     # nope, set it manual
+    HOME=/root
+    SKYWIRE_DATA=$HOME/.skycoin/skywire/
     GOROOT=/usr/local/go
     GOBIN=${GOROOT}/bin
-    GOPATH=/usr/local/skywire/go
+    GOPATH=/usr/local/skycoin/go
     PATH=$PATH:$GOPATH/bin
 fi
 
