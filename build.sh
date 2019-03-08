@@ -677,7 +677,7 @@ function main () {
     fix_armian_defaults
 
     # setup the systemd unit to start the services
-    set_systemd_units
+    # set_systemd_units
 
     # disable chroot
     disable_chroot
