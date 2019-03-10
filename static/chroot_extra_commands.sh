@@ -37,9 +37,9 @@ locale-gen en_US.UTF-8
 # modify and un-comment
 info "Updating your system via APT"
 export DEBIAN_FRONTEND=noninteractive
-apt-get -y update
-#apt-get -y install [your_pkgs_here]
-#apt-get -y remove --purge [your_pkgs_here]
+# apt-get -y update
+# apt-get -y install [your_pkgs_here]
+# apt-get -y remove --purge [your_pkgs_here]
 # keep this on the very end of this block
 info "Cleaning the APT cache to make a smaller image"
 apt-get clean
@@ -56,13 +56,14 @@ mkdir apps
 # compiling
 info "Compile Skywire inside the chroot with Go-Qemu Patch"
 cd ${SKYWIRE_DIR}
-/usr/bin/taskset -c ${CORE} GO111MODULE=on go install ./cmd/skywire-node ./cmd/skywire-cli ./cmd/manager-node ./cmd/therealssh-cli
-/usr/bin/taskset -c ${CORE} GO111MODULE=on go build -o $SKYWIRE_DATA/apps/chat.v1.0 ./cmd/apps/chat
-/usr/bin/taskset -c ${CORE} GO111MODULE=on go build -o $SKYWIRE_DATA/apps/helloworld.v1.0 ./cmd/apps/helloworld
-/usr/bin/taskset -c ${CORE} GO111MODULE=on go build -o $SKYWIRE_DATA/apps/therealproxy.v1.0 ./cmd/apps/therealproxy
-/usr/bin/taskset -c ${CORE} GO111MODULE=on go build -o $SKYWIRE_DATA/apps/therealproxy-client.v1.0  ./cmd/apps/therealproxy-client
-/usr/bin/taskset -c ${CORE} GO111MODULE=on go build -o $SKYWIRE_DATA/apps/therealssh.v1.0  ./cmd/apps/therealssh
-/usr/bin/taskset -c ${CORE} GO111MODULE=on go build -o $SKYWIRE_DATA/apps/therealssh-client.v1.0  ./cmd/apps/therealssh-client
+export GO111MODULE=on
+/usr/bin/taskset -c ${CORE} go install ./cmd/skywire-node ./cmd/skywire-cli ./cmd/manager-node ./cmd/therealssh-cli
+/usr/bin/taskset -c ${CORE} go build -o $SKYWIRE_DATA/apps/chat.v1.0 ./cmd/apps/chat
+/usr/bin/taskset -c ${CORE} go build -o $SKYWIRE_DATA/apps/helloworld.v1.0 ./cmd/apps/helloworld
+/usr/bin/taskset -c ${CORE} go build -o $SKYWIRE_DATA/apps/therealproxy.v1.0 ./cmd/apps/therealproxy
+/usr/bin/taskset -c ${CORE} go build -o $SKYWIRE_DATA/apps/therealproxy-client.v1.0  ./cmd/apps/therealproxy-client
+/usr/bin/taskset -c ${CORE} go build -o $SKYWIRE_DATA/apps/therealssh.v1.0  ./cmd/apps/therealssh
+/usr/bin/taskset -c ${CORE} go build -o $SKYWIRE_DATA/apps/therealssh-client.v1.0  ./cmd/apps/therealssh-client
 # creating the config  for the node
 info "Generating the config for this node (skywire.json)"
 skywire-cli config
