@@ -12,7 +12,7 @@ PATH=$PATH:$GOPATH/bin/:$GOROOT/bin/
 export HOME
 export GOROOT
 export GOPATH
-export SKYCOIN_DIR 
+export SKYCOIN_DIR
 export SKYWIRE_DIR
 export SKYWIRE_DATA
 export PATH
