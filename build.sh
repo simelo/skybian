@@ -473,7 +473,6 @@ function get_n_install_skywire() {
     # change the branch to mainnet and pull it to be sure
     cd "${FS_MNT_POINT}${SKYWIRE_DIR}"
     sudo git checkout mainnet
-    sudo git pull
     cd ${ROOT}
 
 }
