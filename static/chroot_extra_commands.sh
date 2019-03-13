@@ -57,6 +57,10 @@ mkdir apps
 info "Compile Skywire inside the chroot with Go-Qemu Patch"
 cd ${SKYWIRE_DIR}
 export GO111MODULE=on
+/usr/bin/taskset -c ${CORE} go install ./cmd/skywire-node
+/usr/bin/taskset -c ${CORE} go install ./cmd/skywire-cli
+/usr/bin/taskset -c ${CORE} go install ./cmd/manager-node
+/usr/bin/taskset -c ${CORE} go install ./cmd/therealssh-cli
 /usr/bin/taskset -c ${CORE} go install ./cmd/skywire-node ./cmd/skywire-cli ./cmd/manager-node ./cmd/therealssh-cli
 /usr/bin/taskset -c ${CORE} go build -o $SKYWIRE_DATA/apps/chat.v1.0 ./cmd/apps/chat
 /usr/bin/taskset -c ${CORE} go build -o $SKYWIRE_DATA/apps/helloworld.v1.0 ./cmd/apps/helloworld
