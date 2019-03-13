@@ -42,13 +42,13 @@ fi
 
 # function to log messages as info
 function info() {
-    printf '\033[0;32m[ Info ]\033[0m %s\n' "${1}"
+    printf '\033[0;32m[ Info    ]\033[0m %s\n' "${1}"
 }
 
 
 # function to log messages as notices
 function notice() {
-    printf '\033[0;34m[ Notice ]\033[0m %s\n' "${1}"
+    printf '\033[0;34m[ Notice  ]\033[0m %s\n' "${1}"
 }
 
 
@@ -60,7 +60,7 @@ function warn() {
 
 # function to log messages as info
 function error() {
-    printf '\033[0;31m[ Error ]\033[0m %s\n' "${1}"
+    printf '\033[0;31m[ Error   ]\033[0m %s\n' "${1}"
 }
 
 
