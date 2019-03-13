@@ -57,6 +57,9 @@ mkdir apps
 info "Compile Skywire inside the chroot with Go-Qemu Patch"
 cd ${SKYWIRE_DIR}
 export GO111MODULE=on
+/usr/bin/taskset -c ${CORE} go mod download
+/usr/bin/taskset -c ${CORE} go mod download
+/usr/bin/taskset -c ${CORE} go mod verify
 /usr/bin/taskset -c ${CORE} go install ./cmd/skywire-node
 /usr/bin/taskset -c ${CORE} go install ./cmd/skywire-cli
 /usr/bin/taskset -c ${CORE} go install ./cmd/manager-node
