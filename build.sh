@@ -446,8 +446,9 @@ function get_n_install_skywire() {
         rsync -a "${DEV_LOCAL_SKYWIRE}/" "${DOWNLOADS_DIR}/skywire"
 
         # overiding go modules download for offline development
+        notice "DEV trick: Pre-populating the golang module cache"
         sudo mkdir -p "${FS_MNT_POINT}${GOPATH}/pkg/mod"
-        sudo rsync -rv /home/pavel/go/pkg/mod/ "${FS_MNT_POINT}${GOPATH}/pkg/mod/"
+        sudo rsync -r /home/pavel/go/pkg/mod/ "${FS_MNT_POINT}${GOPATH}/pkg/mod/"
     else
         # else where, download from github
         cd "${DOWNLOADS_DIR}/"
