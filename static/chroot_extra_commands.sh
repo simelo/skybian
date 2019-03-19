@@ -48,29 +48,23 @@ apt-get clean
 # there is a known issues about go and qemu, the most usefull workaround is to 
 # keep thread count low, see https://gist.github.com/ahrex/9a84f32a33aadc197a688d2158d7e2ea
 CORE=`lscpu -p  | sed -ne '/^[0-9]\+/ s/,.*$//pg' | sort -R | head -n 1`
+
 # creating the data dirs for skywire
 info "Creating the data dirs for skywire"
 cd $SKYWIRE_DATA
 mkdir skywire
 mkdir apps
-# compiling
-info "Compile Skywire inside the chroot with Go-Qemu Patch"
+
+# compiling the base utilities
+info "Compile Skywire inside the chroot (no qemu patch)"
 cd ${SKYWIRE_DIR}
-export GO111MODULE=on
-/usr/bin/taskset -c ${CORE} env GO111MODULE=on go mod download
-/usr/bin/taskset -c ${CORE} env GO111MODULE=on go mod download
-/usr/bin/taskset -c ${CORE} env GO111MODULE=on go mod verify
-/usr/bin/taskset -c ${CORE} env GO111MODULE=on go install ./cmd/skywire-node
-/usr/bin/taskset -c ${CORE} env GO111MODULE=on go install ./cmd/skywire-cli
-/usr/bin/taskset -c ${CORE} env GO111MODULE=on go install ./cmd/manager-node
-/usr/bin/taskset -c ${CORE} env GO111MODULE=on go install ./cmd/therealssh-cli
-/usr/bin/taskset -c ${CORE} env GO111MODULE=on go install ./cmd/skywire-node ./cmd/skywire-cli ./cmd/manager-node ./cmd/therealssh-cli
-/usr/bin/taskset -c ${CORE} env GO111MODULE=on go build -o $SKYWIRE_DATA/apps/chat.v1.0 ./cmd/apps/chat
-/usr/bin/taskset -c ${CORE} env GO111MODULE=on go build -o $SKYWIRE_DATA/apps/helloworld.v1.0 ./cmd/apps/helloworld
-/usr/bin/taskset -c ${CORE} env GO111MODULE=on go build -o $SKYWIRE_DATA/apps/therealproxy.v1.0 ./cmd/apps/therealproxy
-/usr/bin/taskset -c ${CORE} env GO111MODULE=on go build -o $SKYWIRE_DATA/apps/therealproxy-client.v1.0  ./cmd/apps/therealproxy-client
-/usr/bin/taskset -c ${CORE} env GO111MODULE=on go build -o $SKYWIRE_DATA/apps/therealssh.v1.0  ./cmd/apps/therealssh
-/usr/bin/taskset -c ${CORE} env GO111MODULE=on go build -o $SKYWIRE_DATA/apps/therealssh-client.v1.0  ./cmd/apps/therealssh-client
+export OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64"
+make
+
+# installing the utilities
+info "Install Skywire tools"
+make install
+
 # creating the config  for the node
 info "Generating the config for this node (skywire.json)"
 skywire-cli config
