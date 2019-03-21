@@ -55,16 +55,6 @@ cd $SKYWIRE_DATA
 mkdir skywire
 mkdir apps
 
-# compiling the base utilities
-info "Compile Skywire inside the chroot (no qemu patch)"
-cd ${SKYWIRE_DIR}
-export OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64"
-make
-
-# installing the utilities
-info "Install Skywire tools"
-make install
-
 # creating the config  for the node
 info "Generating the config for this node (skywire.json)"
 skywire-cli config
