@@ -55,9 +55,13 @@ cd $SKYWIRE_DATA
 mkdir skywire
 mkdir apps
 
-# creating the config  for the node
+# creating the config for the node
 info "Generating the config for this node (skywire.json)"
 exec /usr/bin/taskset -c ${CORE} skywire-cli config
+
+# debug
+ls -lh
+cat skywire.json
 
 # forge a time on the system to avoid fs dates are in the future
 info "Setting the chroot clock to now to avoid bugs with the date"
