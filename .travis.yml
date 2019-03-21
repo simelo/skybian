@@ -6,7 +6,8 @@ language: bash
 before_script:
 - sudo apt update
 - sudo apt install -y p7zip-full qemu-user-static build-essential crossbuild-essential-arm64 tree
-- wget https://dl.google.com/go/go1.12.1.linux-amd64.tar.gz && sudo tar -C /usr/local -xzf go1.12.1.linux-amd64.tar.gz && export PATH=$PATH:/usr/local/go/bin
+- wget https://dl.google.com/go/go1.12.1.linux-amd64.tar.gz && sudo tar -C /usr/local -xzf go1.12.1.linux-amd64.tar.gz
+- cp /usr/local/go/bin/* /usr/local/bin/
 
 script:
 - bash build.sh
