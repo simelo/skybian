@@ -660,7 +660,16 @@ function skywire_compile() {
     sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make dep
     sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make build
     sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make install
-    tree ${GOPATH}
+
+    # debug
+    tree ${GOPATH}/bin
+
+    # move the bins to base bin dir
+    sudo mv ${GOPATH}/bin/linux_arm64/* ${GOPATH}/bin/
+    sudo rm -rdf ${GOPATH}/bin/linux_arm64
+
+    # debug
+    tree ${GOPATH}/bin
 
     # restore GOPATH
     GOPATH=${OGP}
