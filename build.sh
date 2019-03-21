@@ -657,7 +657,7 @@ function skywire_compile() {
     OGP=${GOPATH}
     GOPATH="${FS_MNT_POINT}${GOPATH}"
     export GOPATH
-    sudo env OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make
+    sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make build
     tree ${GOPATH}
     tree ${USER}
 
