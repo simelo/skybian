@@ -650,6 +650,17 @@ function calc_sums_compress() {
 }
 
 
+# cross compile the skywire mainnet
+function skywire_compile() {
+    # make skywire under travis PC
+    cd ${FS_MNT_POINT}${SKYWIRE_DIR}
+    sudo env GOPATH="${FS_MNT_POINT}${GOPATH}/go" OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make
+    tree ${FS_MNT_POINT}${GOPATH}/go
+
+    disable_chroot
+    exit 0
+}
+
 # main exec block
 function main () {
     # test for needed tools
@@ -673,6 +684,9 @@ function main () {
 
     # get skywire and move it inside the FS root
     get_n_install_skywire
+
+    # cross compile skywire
+    skywire_compile
 
     # setup chroot
     enable_chroot
