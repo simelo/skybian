@@ -57,9 +57,13 @@ mkdir apps
 
 # creating the config for the node
 info "Generating the config for this node (skywire.json)"
-exec /usr/bin/taskset -c ${CORE} skywire-cli config
+info "Using go Qemu patch, just one CPU thread in the background"
+/usr/bin/taskset -c ${CORE} skywire-cli config &
 
 # debug
+info "Debug info:"
+sleep 5
+pwd
 ls -lh
 cat skywire.json
 
