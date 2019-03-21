@@ -661,15 +661,10 @@ function skywire_compile() {
     sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make build
     sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make install
     tree ${GOPATH}
-    tree ${USER}
 
     # restore GOPATH
     GOPATH=${OGP}
 
-    # debug
-    tree ${GOPATH}
-
-    disable_chroot
     exit 0
 }
 
