@@ -654,10 +654,18 @@ function calc_sums_compress() {
 function skywire_compile() {
     # make skywire under travis PC
     cd ${FS_MNT_POINT}${SKYWIRE_DIR}
-    sudo env GOPATH="${FS_MNT_POINT}${GOPATH}" OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make
-    tree ${FS_MNT_POINT}${GOPATH}
+    OGP=${GOPATH}
+    GOPATH="${FS_MNT_POINT}${GOPATH}"
+    export GOPATH
+    sudo env OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make
     tree ${GOPATH}
     tree ${USER}
+
+    # restore GOPATH
+    GOPATH=${OGP}
+
+    # debug
+    tree ${GOPATH}
 
     disable_chroot
     exit 0
