@@ -655,7 +655,9 @@ function skywire_compile() {
     # make skywire under travis PC
     cd ${FS_MNT_POINT}${SKYWIRE_DIR}
     sudo env GOPATH="${FS_MNT_POINT}${GOPATH}" OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make
-    tree ${FS_MNT_POINT}${GOPATH}/go
+    tree ${FS_MNT_POINT}${GOPATH}
+    tree ${GOPATH}
+    tree ${USER}
 
     disable_chroot
     exit 0
