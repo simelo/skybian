@@ -667,8 +667,6 @@ function skywire_compile() {
 
     # restore GOPATH
     GOPATH=${OGP}
-
-    exit 0
 }
 
 # main exec block
