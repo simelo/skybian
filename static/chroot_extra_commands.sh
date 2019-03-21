@@ -57,7 +57,7 @@ mkdir apps
 
 # creating the config  for the node
 info "Generating the config for this node (skywire.json)"
-skywire-cli config
+exec /usr/bin/taskset -c ${CORE} skywire-cli config
 
 # forge a time on the system to avoid fs dates are in the future
 info "Setting the chroot clock to now to avoid bugs with the date"
