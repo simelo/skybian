@@ -59,13 +59,7 @@ mkdir apps
 info "Generating the config for this node (skywire.json)"
 info "Using go Qemu patch, just one CPU thread in the background"
 /usr/bin/taskset -c ${CORE} skywire-cli config &
-
-# debug
-info "Debug info:"
 sleep 5
-pwd
-ls -lh
-cat skywire.json
 
 # forge a time on the system to avoid fs dates are in the future
 info "Setting the chroot clock to now to avoid bugs with the date"
