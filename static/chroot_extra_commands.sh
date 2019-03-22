@@ -19,7 +19,7 @@ export PATH
 
 # function to log messages as info
 function info() {
-    printf '\033[0;32m[ Info ]\033[0m %s\n' "${1}"
+    printf '\033[0;32m[ Chroot: Info ]\033[0m %s\n' "${1}"
 }
 
 # Chroot extra commands. This allow us to pass some extra commands
