@@ -710,7 +710,7 @@ function main () {
     build_disk
 
     # sums and compress
-    # calc_sums_compress 
+    calc_sums_compress 
 
     # all good signal
     info "Done"

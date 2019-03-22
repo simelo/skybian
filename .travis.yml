@@ -27,4 +27,4 @@ deploy:
   skip_cleanup: true
   on:
     all_branches: true
-    condition: "$TRAVIS_BRANCH =~ ^master|release$"
+    condition: "$TRAVIS_BRANCH =~ ^master|release.*|dev-builds$"
