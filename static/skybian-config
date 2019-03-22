@@ -13,7 +13,7 @@
 #
 #   Network Paramaters are stored on the 12MB mark, exact address is 0xC00000
 #   aka byte 12582912, but we use 256 byte block to reach it so it's on the 
-#   block number 49152 with a maximum length of 256 bytes.
+#   block number 49152.
 #
 #	The following variables describe where to start looking for existing
 #   Network Parameters, again in 256 bytes blocks
@@ -51,7 +51,7 @@ function extract_config() {
 	fi
 }
 
-# extract the data...
+# extract the data if there.
 extract_config
 
 ## If Network Parameters are not found in bootloader: load default config from:
@@ -63,8 +63,8 @@ extract_config
 function check_net() {
     local skynet=`nmcli con show | grep skynet`
 
-	# If connection "skynet" exists:
-    if [ -n "$skynet" ] ; then				# assign it's IP to:
+	# connection "skynet" exists?
+    if [ -n "$skynet" ] ; then
         local skyip=$(nmcli con show skynet | grep IP4.ADDRESS | `
 			`awk '{ print $2 }')
 
@@ -97,47 +97,23 @@ else
 	nmcli con mod skynet ipv4.dns "$DNS"
 fi
 
-## Path to skywire config scripts
-SKYWIRE_UNIX_SCRIPTS=/usr/local/skywire/go/src/github.com/skycoin/`
-						`skywire/static/script
-
-## Check for required environment variables
-# If /etc/default/skywire doesn't exist: 
-if [ ! -f /etc/default/skywire ] ; then
-	# link it
-	ln -s ${SKYWIRE_UNIX_SCRIPTS}/skywire.defaults /etc/default/skywire
-else
-	# If not a link: remove and create link
-	if [ ! -h /etc/default/skywire ] ; then
-		rm /etc/default/skywire
-		ln -s ${SKYWIRE_UNIX_SCRIPTS}/skywire.defaults /etc/default/skywire
-	fi
-fi
-
-## Modify skywire config to point to a skywire-manager
-echo "Setting the manager IP"
-cat /etc/default/skywire | grep -v "MANAGER_IP" | \
-	sed s/"it system wide."/'it system wide.\n'"MANAGER_IP=$MIP"/ \
-	> /tmp/skywire.default
-cp -f /tmp/skywire.default $SKYWIRE_UNIX_SCRIPTS/skywire.defaults
-
-## Enable and start systemd services based on node type
-if [ "$MODE" == "manager" ] ; then
-	echo "Starting as a Skywire-Manager node"
-	systemctl enable skywire-manager
-	systemctl stop skywire-node
-	systemctl disable skywire-node
-	# short pause
-	sleep 2
-	# start
-	systemctl start skywire-manager
-else
-	echo "Starting as a Skywire-Minion node"
-	systemctl enable skywire-node
-	systemctl stop skywire-manager
-	systemctl disable skywire-manager
-	# short pause
-	sleep 2
-	# start
-	systemctl start skywire-node
-fi
+# ## Enable and start systemd services based on node type
+# if [ "$MODE" == "manager" ] ; then
+# 	echo "Starting as a Skywire-Manager node"
+# 	systemctl enable skywire-manager
+# 	systemctl stop skywire-node
+# 	systemctl disable skywire-node
+# 	# short pause
+# 	sleep 2
+# 	# start
+# 	systemctl start skywire-manager
+# else
+# 	echo "Starting as a Skywire-Minion node"
+# 	systemctl enable skywire-node
+# 	systemctl stop skywire-manager
+# 	systemctl disable skywire-manager
+# 	# short pause
+# 	sleep 2
+# 	# start
+# 	systemctl start skywire-node
+# fi
