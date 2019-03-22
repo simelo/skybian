@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Script to stop the skywire apps
+
+# now load it
+. /etc/default/skywire
+. /etc/skybian.conf
+
+## action goes here
+# kill all skywire processes
+
+# hard way so far
+PID=`ps aux | grep skywire-nade | grep -v grep | awk '{print $2}'`
+if [ "$PID" != "" ] ; then
+    echo "Skywire runnig, pid $PID, killing it"
+    `which kill` -9 $PID
+fi
