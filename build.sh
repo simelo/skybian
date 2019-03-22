@@ -606,17 +606,14 @@ function set_systemd_units() {
     info "Setting Systemd unit services"
 
     # local var
-    local UNITSDIR=${FS_MNT_POINT}${SKYWIRE_DIR}/static/script/upgrade/data
     local SYSTEMDDIR=${FS_MNT_POINT}/etc/systemd/system/
 
     # copy only the respective unit
-    sudo cp -f "${UNITSDIR}/skywire-manager.service" ${SYSTEMDDIR}
-    sudo cp -f "${UNITSDIR}/skywire-node.service" ${SYSTEMDDIR}
-    sudo cp -f ${ROOT}/static/skybian-config.service ${SYSTEMDDIR}
+    sudo cp -f "${ROOT}/static/skywire.service" ${SYSTEMDDIR}
 
     # activate it
     info "Activating Systemd unit services."
-    do_in_chroot systemctl enable skybian-config.service
+    do_in_chroot systemctl enable skywire.service
 }
 
 
@@ -668,6 +665,7 @@ function skywire_compile() {
     # restore GOPATH
     GOPATH=${OGP}
 }
+
 
 # main exec block
 function main () {
