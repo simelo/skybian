@@ -27,7 +27,7 @@ function info() {
 # or execute some bash commands
 
 # Create the Skywire data folder if not there
-mkdir -p $SKYWIRE_DATA
+mkdir -vp $SKYWIRE_DATA
 
 # by default update the es_US locales
 info "Re-generating the locales info for en_US.UTF-8"
@@ -52,8 +52,8 @@ CORE=`lscpu -p  | sed -ne '/^[0-9]\+/ s/,.*$//pg' | sort -R | head -n 1`
 # creating the data dirs for skywire
 info "Creating the data dirs for skywire"
 cd $SKYWIRE_DATA
-mkdir skywire
-mkdir apps
+mkdir -vp skywire
+mkdir -vp apps
 
 # creating the config for the node
 info "Generating the config for this node (skywire.json)"

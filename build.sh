@@ -685,7 +685,7 @@ function skywire_compile() {
     # move the apps folder to the final dest
     info "Skywire moving aux apps to proper folder"
     sudo mkdir -vp "${FS_MNT_POINT}${SKYWIRE_DATA}/apps"
-    sudo cp ./apps/* "${FS_MNT_POINT}${SKYWIRE_DATA}/apps"
+    sudo cp ./apps/* "${FS_MNT_POINT}${SKYWIRE_DATA}/apps/"
 
     # debug
     tree "${FS_MNT_POINT}${SKYWIRE_DATA}"
