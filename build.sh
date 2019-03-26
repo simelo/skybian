@@ -661,17 +661,27 @@ function skywire_compile() {
     OGP=${GOPATH}
     GOPATH="${FS_MNT_POINT}${GOPATH}"
     export GOPATH
+
+    # resolving deps
+    info "Skywire resolving dependencies"
     sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make dep
+
+    # Building apps
+    info "Skywire cross-build"
     sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make build
+
+    # Installing cross build apps
+    info "Skywire installing cross-build apps"
     sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make install
 
     # move the bins to base bin dir
+    info "Skywire installing cross-build apps"
     sudo mv ${GOPATH}/bin/linux_arm64/* ${GOPATH}/bin/
     sudo rm -rdf ${GOPATH}/bin/linux_arm64
 
     # debug
     tree ./
-    
+
     # move the apps folder to the final dest
     sudo mv ./apps "${FS_MNT_POINT}${SKYWIRE_DATA}"
 
