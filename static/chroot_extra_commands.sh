@@ -55,18 +55,14 @@ info "Creating the data dirs for skywire"
 cd $SKYWIRE_DATA
 mkdir -vp skywire
 mkdir -vp apps
-info "Actual Path is:"
-pwd
-tree
 
 # move the apps to the final dir
-info "Contents of skywire_dir is:"
-tree $SKYWIRE_DIR
+info "Moving to skywire dir:"
 cd $SKYWIRE_DIR/apps
-tree 
-cp * $SKYWIRE_DATA/apps/
+info "Path and content of apps"
 pwd
 tree ./
+cp -v * $SKYWIRE_DATA/apps/
 
 # creating the config for the node
 info "Generating the config for this node (skywire.json)"
