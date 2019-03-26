@@ -37,8 +37,9 @@ locale-gen en_US.UTF-8
 # modify and un-comment
 info "Updating your system via APT"
 export DEBIAN_FRONTEND=noninteractive
-# apt-get -y update
-# apt-get -y install [your_pkgs_here]
+apt-get -y update
+apt-get upgrade -y
+apt-get -y install tree
 # apt-get -y remove --purge [your_pkgs_here]
 # keep this on the very end of this block
 info "Cleaning the APT cache to make a smaller image"
