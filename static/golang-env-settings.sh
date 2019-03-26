@@ -13,7 +13,7 @@ GOROOT=/usr/local/go
 SKYCOIN_DIR=/usr/local/skycoin
 GOPATH=/usr/local/skycoin/go
 SKYWIRE_DIR=/usr/local/skycoin/skywire
-SKYWIRE_DATA=/root/.skycoin/skywire/
+SKYWIRE_DATA=/root/.skycoin/skywire
 PATH=${PATH}:/usr/local/skycoin/go/bin/:/usr/local/go/bin/
 export HOME
 export GOROOT

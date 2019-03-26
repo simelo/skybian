@@ -683,8 +683,8 @@ function skywire_compile() {
     tree ./apps
 
     # move the apps folder to the final dest
-    sudo mkdir "${FS_MNT_POINT}${SKYWIRE_DATA}/apps"
-    sudo mv ./apps/* "${FS_MNT_POINT}${SKYWIRE_DATA}/apps/"
+    sudo mkdir -p "${FS_MNT_POINT}${SKYWIRE_DATA}/apps"
+    sudo cp ./apps/* "${FS_MNT_POINT}${SKYWIRE_DATA}/apps/"
 
     # debug
     tree "${FS_MNT_POINT}${SKYWIRE_DATA}"
