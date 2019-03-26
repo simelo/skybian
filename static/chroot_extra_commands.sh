@@ -60,6 +60,8 @@ pwd
 tree
 
 # move the apps to the final dir
+info "Contents of skywire_dir is:"
+tree $SKYWIRE_DIR
 cp "$SKYWIRE_DIR/apps/*" ./apps/..
 pwd
 tree ./
