@@ -658,6 +658,9 @@ function calc_sums_compress() {
 function skywire_compile() {
     # make skywire under travis PC
     cd ${FS_MNT_POINT}${SKYWIRE_DIR}
+    info "Actual Path is:"
+    pwd
+    tree
     OGP=${GOPATH}
     GOPATH="${FS_MNT_POINT}${GOPATH}"
     export GOPATH

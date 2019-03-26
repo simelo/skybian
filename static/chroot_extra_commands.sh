@@ -55,6 +55,9 @@ info "Creating the data dirs for skywire"
 cd $SKYWIRE_DATA
 mkdir -vp skywire
 mkdir -vp apps
+info "Actual Path is:"
+pwd
+tree
 
 # move the apps to the final dir
 cp "$SKYWIRE_DIR/apps/*" ./apps/..
