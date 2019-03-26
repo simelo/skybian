@@ -15,7 +15,8 @@ script:
 notifications:
   email:
     - false
-  webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
+  webhooks:
+    - https://fathomless-fjord-24024.herokuapp.com/notify
 
 before_deploy:
 - bash build.sh -p
