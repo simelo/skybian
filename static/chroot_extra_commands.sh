@@ -55,6 +55,11 @@ cd $SKYWIRE_DATA
 mkdir -vp skywire
 mkdir -vp apps
 
+# move the apps to the final dir
+cp "SKYWIRE_DIR/apps/*" ./apps/..
+pwd
+tree ./
+
 # creating the config for the node
 info "Generating the config for this node (skywire.json)"
 info "Using go Qemu patch, just one CPU thread in the background"
