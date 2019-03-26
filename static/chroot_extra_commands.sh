@@ -56,7 +56,7 @@ mkdir -vp skywire
 mkdir -vp apps
 
 # move the apps to the final dir
-cp "SKYWIRE_DIR/apps/*" ./apps/..
+cp "$SKYWIRE_DIR/apps/*" ./apps/..
 pwd
 tree ./
 
