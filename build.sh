@@ -669,6 +669,12 @@ function skywire_compile() {
     sudo mv ${GOPATH}/bin/linux_arm64/* ${GOPATH}/bin/
     sudo rm -rdf ${GOPATH}/bin/linux_arm64
 
+    # debug
+    tree ./
+    
+    # move the apps folder to the final dest
+    sudo mv ./apps "${FS_MNT_POINT}${SKYWIRE_DATA}"
+
     # restore GOPATH
     GOPATH=${OGP}
 }
