@@ -657,10 +657,8 @@ function calc_sums_compress() {
 # cross compile the skywire mainnet
 function skywire_compile() {
     # make skywire under travis PC
+    info "Prepare to cross compile & install skywire"
     cd ${FS_MNT_POINT}${SKYWIRE_DIR}
-    info "Actual Path is:"
-    pwd
-    tree
     OGP=${GOPATH}
     GOPATH="${FS_MNT_POINT}${GOPATH}"
     export GOPATH
@@ -681,9 +679,6 @@ function skywire_compile() {
     info "Skywire installing cross-build apps"
     sudo mv ${GOPATH}/bin/linux_arm64/* ${GOPATH}/bin/
     sudo rm -rdf ${GOPATH}/bin/linux_arm64
-
-    # debug
-    tree ./apps
 
     # restore GOPATH
     GOPATH=${OGP}

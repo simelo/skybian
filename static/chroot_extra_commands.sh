@@ -57,11 +57,8 @@ mkdir -vp skywire
 mkdir -vp apps
 
 # move the apps to the final dir
-info "Moving to skywire dir:"
+info "Moving apps to final dir"
 cd $SKYWIRE_DIR/apps
-info "Path and content of apps"
-pwd
-tree ./
 cp -v * $SKYWIRE_DATA/apps/
 
 # creating the config for the node
