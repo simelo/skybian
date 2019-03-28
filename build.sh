@@ -657,15 +657,26 @@ function calc_sums_compress() {
 # cross compile the skywire mainnet
 function skywire_compile() {
     # make skywire under travis PC
+    info "Prepare to cross compile & install skywire"
     cd ${FS_MNT_POINT}${SKYWIRE_DIR}
     OGP=${GOPATH}
     GOPATH="${FS_MNT_POINT}${GOPATH}"
     export GOPATH
+
+    # resolving deps
+    info "Skywire resolving dependencies"
     sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make dep
+
+    # Building apps
+    info "Skywire cross-build"
     sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make build
+
+    # Installing cross build apps
+    info "Skywire installing cross-build apps"
     sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make install
 
     # move the bins to base bin dir
+    info "Skywire installing cross-build apps"
     sudo mv ${GOPATH}/bin/linux_arm64/* ${GOPATH}/bin/
     sudo rm -rdf ${GOPATH}/bin/linux_arm64
 

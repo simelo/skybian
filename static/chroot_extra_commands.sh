@@ -7,7 +7,7 @@ GOROOT=/usr/local/go
 SKYCOIN_DIR=/usr/local/skycoin
 GOPATH=${SKYCOIN_DIR}/go
 SKYWIRE_DIR=${SKYCOIN_DIR}/skywire
-SKYWIRE_DATA=${HOME}/.skycoin/skywire/
+SKYWIRE_DATA=${HOME}/.skycoin/skywire
 PATH=$PATH:$GOPATH/bin/:$GOROOT/bin/
 export HOME
 export GOROOT
@@ -27,7 +27,7 @@ function info() {
 # or execute some bash commands
 
 # Create the Skywire data folder if not there
-mkdir -p $SKYWIRE_DATA
+mkdir -vp $SKYWIRE_DATA
 
 # by default update the es_US locales
 info "Re-generating the locales info for en_US.UTF-8"
@@ -37,8 +37,9 @@ locale-gen en_US.UTF-8
 # modify and un-comment
 info "Updating your system via APT"
 export DEBIAN_FRONTEND=noninteractive
-# apt-get -y update
-# apt-get -y install [your_pkgs_here]
+apt-get -y update
+apt-get upgrade -y
+apt-get -y install tree
 # apt-get -y remove --purge [your_pkgs_here]
 # keep this on the very end of this block
 info "Cleaning the APT cache to make a smaller image"
@@ -52,8 +53,13 @@ CORE=`lscpu -p  | sed -ne '/^[0-9]\+/ s/,.*$//pg' | sort -R | head -n 1`
 # creating the data dirs for skywire
 info "Creating the data dirs for skywire"
 cd $SKYWIRE_DATA
-mkdir skywire
-mkdir apps
+mkdir -vp skywire
+mkdir -vp apps
+
+# move the apps to the final dir
+info "Moving apps to final dir"
+cd $SKYWIRE_DIR/apps
+cp -v * $SKYWIRE_DATA/apps/
 
 # creating the config for the node
 info "Generating the config for this node (skywire.json)"
