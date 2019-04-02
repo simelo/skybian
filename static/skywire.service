@@ -1,13 +1,22 @@
 [Unit]
-Description=Skywire mainnet development version node start/stop service
+Description=Skywire mainnet (development version) node service
+# need network up & running
 After=network.target
 After=network-online.target
+# to try to keep it alive no matter what
+StartLimitIntervalSec=0
 
 [Service]
-Type=oneshot
+# simple service
+Type=Simple
+# restart on crash/error/whatever
+Restart=always
+# wait time for the restart tries
+RestartSec=30
+# Start command
 ExecStart=/usr/local/bin/skywire-start
+# stop command
 ExecStop=/usr/local/bin/skywire-stop
-RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target
