@@ -10,7 +10,7 @@
 # kill all skywire processes
 
 # hard way so far
-PID=`ps aux | grep skywire-nade | grep -v grep | awk '{print $2}'`
+PID=`ps aux | grep skywire-node | grep -v grep | awk '{print $2}'`
 if [ "$PID" != "" ] ; then
     echo "Skywire runnig, pid $PID, killing it"
     `which kill` -9 $PID

@@ -27,15 +27,15 @@
 # RUN_MODE=$(get_mode)
 
 # by not on dev stage we just run the node
-echo "Starting skywire mainnet in development mode mode"
+echo "Starting skywire mainnet in development mode"
 cd ${SKYWIRE_DATA}
 
-# check if the skywire.json file is in there
-if [ ! -f "skywire.json" ] ; then
+# check if the skywire-config.json file is in there
+if [ ! -f "skywire-config.json" ] ; then
     # not there, create it
-    skywire-cli config
+    skywire-cli gen-config
 fi
 
 # run the node
-skywire-node skywire.json
+skywire-node skywire-config.json
 
