@@ -614,6 +614,9 @@ function set_systemd_units() {
     sudo cp -f "${ROOT}/static/skywire-start" ${FS_MNT_POINT}/usr/local/bin/
     sudo cp -f "${ROOT}/static/skywire-stop" ${FS_MNT_POINT}/usr/local/bin/
 
+    # making the start/stop scripts executables
+    sudo chmod +x ${FS_MNT_POINT}/usr/local/bin/skywire*
+
     # activate it
     info "Activating Systemd unit services."
     do_in_chroot systemctl enable skywire.service
