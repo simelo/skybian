@@ -18,7 +18,27 @@ Use this tags to keep track of the changes:
 Dates must be YEAR-MONTH-DAY
 -->
 
-## Unreleased (0.0.3) - 2019-02-02
+## Unreleased (0.0.4) - TBD
+
+### Added
+
+- Added latest Skywire mainnet developer code
+- Added new systemd units and scripts
+
+### Changed
+
+- OS upgraded to Armbian 5.75 with kernel 4.19.20
+- Armbian changed the layout of the filesystem and the boot firmware, so we changed to adapt to that.
+- Config offset is now at block #32768 (of 512 bytes) higher than in previous versions
+- Armbian changed/turned-off the debug output in the serial console, be patient it will came with a prompt in about 1 minute
+- Upgraded go to version 1.12.1
+
+## Deprecated
+
+- Skyflash at this point needs to be modified to work with this because of the change on the filesystem layout of armbian
+
+
+## Testing pre-release (0.0.3) - 2019-02-02
 
 ### Added
 
