@@ -607,8 +607,15 @@ function set_systemd_units() {
     # local var
     local SYSTEMDDIR=${FS_MNT_POINT}/etc/systemd/system/
 
-    # copy only the respective unit
+    # copy the respective unit
     sudo cp -f "${ROOT}/static/skywire.service" ${SYSTEMDDIR}
+
+    # copy the start & stop scripts
+    sudo cp -f "${ROOT}/static/skywire-start" ${FS_MNT_POINT}/usr/local/bin/
+    sudo cp -f "${ROOT}/static/skywire-stop" ${FS_MNT_POINT}/usr/local/bin/
+
+    # making the start/stop scripts executables
+    sudo chmod +x ${FS_MNT_POINT}/usr/local/bin/skywire*
 
     # activate it
     info "Activating Systemd unit services."
