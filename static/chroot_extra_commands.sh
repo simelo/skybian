@@ -65,7 +65,7 @@ cp -v * $SKYWIRE_DATA/apps/
 info "Generating the config for this node (skywire.json)"
 info "Using go Qemu patch, just one CPU thread in the background"
 cd $SKYWIRE_DATA
-/usr/bin/taskset -c ${CORE} skywire-cli gen-config &
+/usr/bin/taskset -c ${CORE} skywire-cli node gen-config &
 sleep 5
 info "Content of: $SKYWIRE_DATA"
 tree ./

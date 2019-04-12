@@ -33,7 +33,7 @@ cd ${SKYWIRE_DATA}
 # check if the skywire-config.json file is in there
 if [ ! -f "skywire-config.json" ] ; then
     # not there, create it
-    skywire-cli gen-config
+    skywire-cli mnode gen-config
 fi
 
 # run the node
