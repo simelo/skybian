@@ -672,15 +672,15 @@ function skywire_compile() {
 
     # resolving deps
     info "Skywire resolving dependencies"
-    sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make dep
+    sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64 CGO_ENABLED=1" make dep
 
     # Building apps
     info "Skywire cross-build"
-    sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make build
+    sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64 CGO_ENABLED=1" make build
 
     # Installing cross build apps
     info "Skywire installing cross-build apps"
-    sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64" make install
+    sudo OPTS="GO111MODULE=on GOOS=linux GOARCH=arm64 CGO_ENABLED=1" make install
 
     # move the bins to base bin dir
     info "Skywire installing cross-build apps"
